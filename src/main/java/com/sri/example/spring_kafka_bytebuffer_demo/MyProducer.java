@@ -28,7 +28,10 @@ public class MyProducer {
         kafkaTemplate.send("my-topic", model.getGuid(), ByteBuffer.wrap(objectMapper.writeValueAsBytes(model)))
             .whenComplete((result, throwable) -> {
                 if (result != null) {
-                    log.info("Published to Kafka successfully {}.", new String(result.getProducerRecord().value().array()));
+                    ByteBuffer byteBuffer = result.getProducerRecord().value();
+                    log.info("Published to Kafka successfully with result {}", result);
+                    log.info("Byte array (byteBuffer.array()) derived from ByteBuffer is {}", byteBuffer.array());
+                    log.info("Published message as string is {}.", new String(byteBuffer.array()));
                 } else {
                     log.error("Unable to publish event to Kafka.", throwable);
                 }

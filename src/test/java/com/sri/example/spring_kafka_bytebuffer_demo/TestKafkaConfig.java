@@ -26,12 +26,12 @@ public class TestKafkaConfig {
     @KafkaListener(topics = "my-topic")
     public void consume(ConsumerRecord<String, ByteBuffer> message) {
 
-        ObjectMapper objectMapper = new ObjectMapper();
+        log.info("Received record is {}", message);
         byte[] value = message.value().array();
         log.info("Received payload bytes: {}", value);
         String content = new String(value);
         log.info("Received payload string: {}", content);
-        MyKafkaModel event = objectMapper.readValue(content, MyKafkaModel.class);
+        MyKafkaModel event = new ObjectMapper().readValue(content, MyKafkaModel.class);
         log.info("event received: {}", event);
         myKafkaModels().add(event);
     }

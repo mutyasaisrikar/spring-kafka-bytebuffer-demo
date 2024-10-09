@@ -17,7 +17,7 @@
 	
 	<properties>
 		<java.version>17</java.version>
-		<kafka.version>3.8.0</kafka.version> <!--Change the version to 3.5.2, to make it working-->
+		<!--<kafka.version>3.5.2</kafka.version>--> <!-- Uncomment this to make it working-->
 	</properties>
 	
 	<dependencies>
